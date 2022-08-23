@@ -127,4 +127,5 @@ This documentation guides you in setting up a cluster with one master node and t
 
 
 rm -rf /etc/containerd/config.toml
+
 systemctl restart containerd
