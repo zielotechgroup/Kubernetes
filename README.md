@@ -102,7 +102,7 @@ This documentation guides you in setting up a cluster with one master node and t
     
     ```sh
     sudo su - kubeadmin 
-    curl https://docs.projectcalico.org/manifests/calico-typha.yaml -o calico.yaml
+    curl https://docs.projectcalico.org/manifests/calico.yaml -o calico.yaml
     kubectl apply -f calico.yaml
     ```
 
