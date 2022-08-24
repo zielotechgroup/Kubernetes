@@ -126,9 +126,11 @@ This documentation guides you in setting up a cluster with one master node and t
     ```
 
 
+# RUN-TIME ERROR HANDLE
 
 rm -rf /etc/containerd/config.toml
 
 systemctl restart containerd
 
+----------------------------------------
  kubectl label node ip-172-31-86-115.ec2.internal kubernetes.io/role=worker --overwrite=true
