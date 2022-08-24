@@ -15,9 +15,10 @@ This documentation guides you in setting up a cluster with one master node and t
     10250  
     4443  
     443  
-    8080 `
+    8080 
+    179`
 
-   ##### On Master node and Worker node:
+   ##### On Worker node:
     `179`  
 
    ### `On Master and Worker:`
