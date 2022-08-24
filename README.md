@@ -115,6 +115,9 @@ This documentation guides you in setting up a cluster with one master node and t
 1. Add worker nodes to cluster 
     > Use the output from __kubeadm token create__ command in previous step from the master server and run here.
 
+
+## `On Master Node:`
+
 1. Verifying the cluster
     To Get Nodes status
     ```sh
