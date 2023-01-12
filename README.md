@@ -21,7 +21,7 @@ This documentation guides you in setting up a cluster with one master node and t
    ##### On Worker node:
     `179`  
 
-   ### `On Master and Worker:`
+   ### `On Both Master and Worker:`
 1. Perform all the commands as root user unless otherwise specified
  
    Install, Enable and start docker service.
@@ -29,9 +29,9 @@ This documentation guides you in setting up a cluster with one master node and t
    > If you use docker from CentOS OS repository, the docker version might be old to work with Kubernetes v1.13.0 and above
 
    ```sh
-   yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
-   yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
-   yum install -y -q docker-ce >/dev/null 2>&1
+   sudo yum install -y yum-utils
+   sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
    ```
 1. Start Docker services 
    ```sh
@@ -55,7 +55,7 @@ This documentation guides you in setting up a cluster with one master node and t
     ```
 1. Update sysctl settings for Kubernetes networking
    ```sh
-   cat >> /etc/sysctl.d/kubernetes.conf <<EOF
+   sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
    net.bridge.bridge-nf-call-ip6tables = 1
    net.bridge.bridge-nf-call-iptables = 1
    EOF
@@ -64,15 +64,14 @@ This documentation guides you in setting up a cluster with one master node and t
 ## Kubernetes Setup
 1. Add yum repository for kubernetes packages 
     ```sh
-    cat >>/etc/yum.repos.d/kubernetes.repo<<EOF
+    sudo tee /etc/yum.repos.d/kubernetes.repo<<EOF
     [kubernetes]
     name=Kubernetes
     baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
     enabled=1
     gpgcheck=1
     repo_gpgcheck=1
-    gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
-            https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
     EOF
     ```
 1. Install Kubernetes
@@ -84,7 +83,7 @@ This documentation guides you in setting up a cluster with one master node and t
     systemctl enable kubelet
     systemctl start kubelet
     ```
-## `On Master Node:`
+## `On Master Node Only:`
 1. Initialize Kubernetes Cluster
     ```sh
     kubeadm init --apiserver-advertise-address=<MasterServerIP> --pod-network-cidr=192.168.0.0/16
@@ -111,7 +110,7 @@ This documentation guides you in setting up a cluster with one master node and t
     ```sh
     kubeadm token create --print-join-command
     ```
-## `On Worker Node:`
+## `On Worker Node Only:`
 1. Add worker nodes to cluster 
     > Use the output from __kubeadm token create__ command in previous step from the master server and run here.
 
@@ -136,4 +135,5 @@ rm -rf /etc/containerd/config.toml
 systemctl restart containerd
 
 ----------------------------------------
+# For label change
  kubectl label node ip-172-31-86-115.ec2.internal kubernetes.io/role=worker --overwrite=true
