@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alpine-dep
+  name: webapp-dep
 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: webapp
   template:
     metadata: 
       name: demo-pod-2
       labels:
-        app: nginx
+        app: webapp
     spec:
       containers:
       - name: demo-container
-        image: nginx
+        image: nayakomprasad/maven-webapp:1.0
