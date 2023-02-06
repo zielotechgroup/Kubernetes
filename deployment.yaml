@@ -17,3 +17,5 @@ spec:
       containers:
       - name: demo-container
         image: nayakomprasad/maven-webapp:1.0
+        ports:
+        - containerPort: 8080
