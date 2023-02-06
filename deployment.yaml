@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-dep-INT
+  name: webapp-dep-integration
 
 spec:
   replicas: 3
