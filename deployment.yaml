@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
       - name: demo-container
-        image: alpine
+        image: nginx
